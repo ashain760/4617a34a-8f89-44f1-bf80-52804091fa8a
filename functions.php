@@ -4,6 +4,40 @@ function loadJson($filename) {
     return json_decode(file_get_contents(__DIR__ . '/data/' . $filename), true);
 }
 
+function init($studentId, $reportType){
+
+    // Load JSON data
+    $students = loadJson('students.json'); // Load student data from JSON file into an array
+    $assessments = loadJson('assessments.json'); // Load assessment data from JSON file into an array
+    $questions = loadJson('questions.json'); // Load question data from JSON file into an array
+    $responses = loadJson('student-responses.json'); // Load student responses data from JSON file into an array
+
+    // Find the student by ID
+    $student = findStudent($studentId, $students);
+
+    if (!$student) {
+        echo "\n";
+        echo "Student not found.\n";
+        exit;
+    }
+
+    $fullName = $student['firstName'] . ' ' . $student['lastName'];
+
+    // Filter responses for this student and sort by completion date
+    $studentResponses = array_filter($responses, function ($resp) use ($studentId) {
+        return isset($resp['student']['id']) && $resp['student']['id'] === $studentId && isset($resp['completed']);
+    });
+
+    if (empty($studentResponses)) {
+        echo "\n";
+        echo "No completed assessments for this student.\n";
+        exit;
+    }
+
+    generateReport($reportType, $studentResponses, $questions, $fullName);
+
+}
+
 // Find a student by their ID from the list of students
 function findStudent($id, $students) {
     foreach ($students as $s) {

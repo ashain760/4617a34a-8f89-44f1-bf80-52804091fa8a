@@ -20,6 +20,8 @@ This PHP CLI application generates different types of assessment reports (Diagno
 
 2. Ensure that the JSON data files are present in the root directory alongside the PHP script.
 
+3. Run `composer install`
+
 ---
 
 ## Running the Application
@@ -30,3 +32,10 @@ Run the PHP CLI script using the following command:
 
 ```bash
 php report.php
+````
+
+## Test the Application
+
+```bash
+composer test
+````

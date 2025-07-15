@@ -1,0 +1,13 @@
+# Ignore PHPStorm or VSCode project files
+.idea/
+.vscode/
+
+# Composer dependencies
+/vendor/
+composer.lock
+
+# PHPUnit logs and cache
+.phpunit.result.cache
+
+# Ignore test output
+test-output/
