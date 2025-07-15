@@ -5,94 +5,76 @@ require_once __DIR__ . '/../functions.php';
 
 final class FunctionsTest extends TestCase
 {
-    public function testData1()
+    public function testDiagnosticReport()
     {
-        echo "\nTEST RESULT 1 ========================= \n";
+        echo "\nTEST RESULT 1 ==================\n";
 
         $studentId = "student1";
         $reportType = 1;
 
-        // Start output buffering
         ob_start();
         init($studentId, $reportType);
-        $output1 = ob_get_clean(); // Capture all output
-        echo $output1;
+        echo $output = ob_get_clean();
 
-        // Assert that output contains expected substrings
-        $this->assertStringContainsString('correct', $output1);
-
+        $this->assertStringContainsString('recently completed Numeracy assessment', $output);
+        $this->assertStringContainsString('correct', $output);
     }
 
-    public function testData2()
+    public function testProgressReport()
     {
-        echo "\nTEST RESULT 2 ========================= \n";
+        echo "\nTEST RESULT 2 ==================\n";
 
         $studentId = "student1";
         $reportType = 2;
 
-        // Start output buffering
         ob_start();
         init($studentId, $reportType);
-        $output2 = ob_get_clean(); // Capture all output
-        echo $output2;
+        echo $output = ob_get_clean();
 
-        // Assert that output contains expected substrings
-        $this->assertStringContainsString('correct', $output2);
-
+        $this->assertStringContainsString('has completed Numeracy assessment', $output);
+        $this->assertStringContainsString('Raw Score', $output);
     }
 
-    public function testData3()
+    public function testFeedbackReport()
     {
-        echo "\nTEST RESULT 3 ========================= \n";
+        echo "\nTEST RESULT 3 ==================\n";
 
         $studentId = "student1";
         $reportType = 3;
 
-        // Start output buffering
         ob_start();
         init($studentId, $reportType);
-        $output3 = ob_get_clean(); // Capture all output
-        echo $output3;
+        echo $output = ob_get_clean();
 
-        // Assert that output contains expected substrings
-        $this->assertStringContainsString('correct', $output3);
-
+        $this->assertStringContainsString('Feedback for wrong answers', $output);
+        $this->assertStringContainsString('Hint:', $output);
     }
 
-    public function testData4()
+    public function testStudentNotFound()
     {
-        echo "\nTEST RESULT 4 ========================= \n";
+        echo "\nTEST RESULT 4 ==================\n";
 
-        $studentId = "student400";
+        $studentId = "student400"; // Invalid ID
         $reportType = 2;
 
-        // Start output buffering
         ob_start();
         init($studentId, $reportType);
-        $output4 = ob_get_clean(); // Capture all output
-        echo $output4;
+        $output = ob_get_clean();
 
-        // Assert that output contains expected substrings
-        $this->assertStringContainsString('correct', $output4);
-
+        $this->assertStringContainsString('Student not found', $output);
     }
 
-    public function testData5()
+    public function testInvalidReportType()
     {
-        echo "\nTEST RESULT 5 ========================= \n";
+        echo "\nTEST RESULT 5 ==================\n";
 
         $studentId = "student1";
-        $reportType = 10;
+        $reportType = 99; // Invalid
 
-        // Start output buffering
         ob_start();
         init($studentId, $reportType);
-        $output5 = ob_get_clean(); // Capture all output
-        echo $output5;
+        $output = ob_get_clean();
 
-        // Assert that output contains expected substrings
-        $this->assertStringContainsString('correct', $output5);
-
+        $this->assertStringContainsString('Invalid report type', $output);
     }
-
 }
