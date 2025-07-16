@@ -10,7 +10,7 @@ This PHP CLI application generates different types of assessment reports (Diagno
 
 - PHP 7.0 or higher installed on your system.  
 - Command line access (Terminal or Command Prompt).  
-- JSON data files (`students.json`, `assessments.json`, `questions.json`, `student-responses.json`) placed in the project directory.  
+- JSON data files (`students.json`, `assessments.json`, `questions.json`, `student-responses.json`) placed in the data directory.  
 
 ---
 
